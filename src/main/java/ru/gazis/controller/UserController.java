@@ -22,9 +22,9 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/user/{userId}", method = RequestMethod.GET)
-    public ResponseEntity<User> getUser(@PathVariable("userId") Integer userId) {
-        User user = userService.getUser(userId);
+    @RequestMapping(value = "/user/{userName}", method = RequestMethod.GET)
+    public ResponseEntity<User> getUser(@PathVariable("userName") String userName) {
+        User user = userService.getUserByUserName(userName);
         if (user == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -35,7 +35,7 @@ public class UserController {
     @RequestMapping(value = "/user/{userId}", method = RequestMethod.PUT)
     public ResponseEntity<User> updateUser(@PathVariable("userId") Integer userId, @RequestBody User user) {
         HttpHeaders headers = new HttpHeaders();
-        User isExist = userService.getUser(userId);
+        User isExist = userService.getUserById(userId);
         if (isExist == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else if (user == null) {

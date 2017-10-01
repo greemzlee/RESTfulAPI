@@ -62,7 +62,7 @@ public class UserControllerTest extends TestCase {
 
     @Test
     public void testGetUser() throws Exception {
-        User user = userService.getUser(1);
+        User user = userService.getUserById(1);
         mockMvc.perform(get("/user/{userId}", user.getUserId()).accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/json;charset=UTF-8"))

@@ -24,24 +24,24 @@ public class UserServiceImplTest extends TestCase {
 
     @Test
     public void testGetUser() throws Exception {
-        User user = service.getUser(1);
+        User user = service.getUserById(1);
         assertNotNull(user);
     }
 
     @Test
     public void testGetUserNotFound() throws Exception {
-        User user = service.getUser(1);
+        User user = service.getUserById(1);
         assertNotNull(user);
     }
 
     @Test
     public void testUpdateUser() throws Exception {
-        User user = service.getUser(1);
+        User user = service.getUserById(1);
         String oldLast = user.getLastName();
         String newLast = oldLast + "1";
         user.setLast(newLast);
         service.updateUser(user);
-        User changedUser = service.getUser(1);
+        User changedUser = service.getUserById(1);
         assertEquals(changedUser.getLastName(), newLast);
     }
 

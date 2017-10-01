@@ -23,7 +23,28 @@ public class UserDaoImpl implements UserDao {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-    public User getUser(Integer userId) {
+    public User getUserByUserName(String userName) {
+        User user = null;
+        try {
+            user = jdbcTemplate.queryForObject("SELECT * FROM user WHERE userName = ?",
+                    new Object[]{userName}, new RowMapper<User>() {
+                        @Override
+                        public User mapRow(ResultSet resultSet, int i) throws SQLException {
+                            return new User(
+                                    resultSet.getInt("userId"),
+                                    resultSet.getString("userName"),
+                                    resultSet.getString("first"),
+                                    resultSet.getString("last")
+                            );
+                        }
+                    });
+        } catch (DataAccessException e) {
+            return null;
+        }
+        return user;
+    }
+
+    public User getUserById(Integer userId) {
         User user = null;
         try {
             user = jdbcTemplate.queryForObject("SELECT * FROM user WHERE userId = ?",

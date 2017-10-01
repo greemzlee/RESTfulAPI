@@ -40,24 +40,24 @@ public class UserDaoImplTest extends TestCase {
 
     @Test
     public void testGetUser() throws Exception {
-        User user = dao.getUser(1);
+        User user = dao.getUserById(1);
         assertNotNull(user);
     }
 
     @Test
     public void testGetUserNotFound() throws Exception {
-        User user = dao.getUser(1000);
+        User user = dao.getUserById(1000);
         assertNull(user);
     }
 
     @Test
     public void testUpdateUser() throws Exception {
-        User user = dao.getUser(1);
+        User user = dao.getUserById(1);
         String oldLast = user.getLastName();
         String newLast = oldLast + "1";
         user.setLast(newLast);
         dao.updateUser(user);
-        User changedUser = dao.getUser(1);
+        User changedUser = dao.getUserById(1);
         assertEquals(changedUser.getLastName(), newLast);
     }
 
